@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD Design</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+  <main>
+    <div class="container py-3">
+      <div class="crud-form w-75 p-2 rounded-4 m-auto">
+        <h1 class="h2 mb-3 text-center">Product Mangement System</h1>
+        <div class="form-floating mb-2">
+          <input type="text" class="form-control" id="productName" placeholder="productName">
+          <label for="productName">product Name</label>
+          <p class="text-danger fw-bold d-none" id="alertName">Name should Start with a capital letter then 3 to 8 lowercase
+            letters</p>
+        </div>
+        <div class="form-floating mb-2">
+          <input type="number" class="form-control" id="productPrice" placeholder="productPrice">
+          <label for="productPrice">product Price</label>
+          <p class="text-danger fw-bold d-none" id="alertPrice">Price is Not Valid !</p>
+        </div>
+        <div class="form-floating mb-2">
+          <input list="category" type="text" class="form-control" id="productCategory" placeholder="productCategory">
+          <label for="productCategory">product Category</label>
+          <p class="text-danger fw-bold d-none" id="alertCategory">Category is Not Valid !</p>
+          <datalist id="category">
+            <option value="cono" />
+            <option value="Mix" />
+            <option value="strawberry" />
+            <option value="chocolate" />
+          </datalist>
+        </div>
+        <div class="form-floating mb-2">
+          <textarea class="form-control" rows="2" id="productDescription" placeholder="productDescription"></textarea>
+          <label for="productDescription">product Description</label>
+          <p class="text-danger fw-bold d-none" id="alertDescription">Description is Not Valid !</p>
+        </div>
+        <div class="form-floating mb-2">
+          <input type="file" class="form-control" id="productImage" placeholder="productImage">
+          <label for="productImage">product Image</label>
+          <p class="text-danger fw-bold d-none" id="alertImage">Image is Not Valid !</p>
+        </div>
+        <button class="btn btn-primary" id="btnAdd">Add Product</button>
+        <button class="btn btn-warning d-none" id="btnUbdate">Ubdate Product</button>
+      </div>
+    </div>
+
+    <div class="container py-4 w-50">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="btnSearch" placeholder="btnSearch">
+        <label for="btnSearch">Search With Name Product ....</label>
+      </div>
+    </div>
+
+    <div class="container py-4">
+      <div class="row gy-3" id="myData">
+
+      </div>
+    </div>
+  </main>
+
+
+
+
+
+
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

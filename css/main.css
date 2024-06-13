@@ -1,0 +1,22 @@
+body {
+    background-color: #f1b8f1;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.crud-form {
+    background-color: violet;
+}
+
+.form-floating>.form-control,
+.form-floating>.form-control-plaintext,
+.form-floating>.form-select {
+    height: auto;
+}
+
+.item {
+    border: 1px solid red;
+}
+
+.form-control:focus {
+    border-color: violet;
+}
