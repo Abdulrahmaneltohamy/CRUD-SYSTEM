@@ -50,7 +50,7 @@ function displayProduct(list) {
     cartona += `
         <div class="col-md-4">
           <div class="item rounded-2 overflow-hidden">
-            <img style="height: 350px;" src="${list[i].image}" class="w-100" alt="product image">
+            <img style="height: 300px;" src="${list[i].image}" class="w-100" alt="product image">
             <div class="item-desc p-2">
               <h2 class="h6"><b>Title : </b>${list[i].name} </h2>
               <h3 class="h6"><b>Price : </b>${list[i].price}</h3>
@@ -220,7 +220,7 @@ productDescription.addEventListener("input", function () {
 })
 
 function validateDescription() {
-  var regex = /^.{3,25}$/;
+  var regex = /^.{3,20}$/;
   var text = productDescription.value;
   var descriptionInvalidInput = document.getElementById("alertDescription")
 
