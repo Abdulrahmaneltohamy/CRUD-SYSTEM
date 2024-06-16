@@ -35,9 +35,7 @@ function addProduct() {
       price: productPrice.value,
       category: productCategory.value,
       description: productDescription.value,
-      image: productImage.files[0]?.name ? `image/${productImage.files[0]?.name}`: `image/c.jpg`,
-      id : allProduct.length
-      
+      image: productImage.files[0]?.name ? `image/${productImage.files[0]?.name}`: `image/c.jpg`
     }
     allProduct.push(productData);
     setLocalStorage();
@@ -47,20 +45,20 @@ function addProduct() {
 }
 
 // dispaly data
-function displayProduct(list) {
+function displayProduct() {
   var cartona = "";
-  for (var i = 0; i < list.length; i++) {
+  for (var i = 0; i < allProduct.length; i++) {
     cartona += `
         <div class="col-md-4">
           <div class="item rounded-2 overflow-hidden">
-            <img style="height: 300px;" src="${list[i].image}" class="w-100" alt="product image">
+            <img style="height: 300px;" src="${allProduct[i].image}" class="w-100" alt="product image">
             <div class="item-desc p-2">
-              <h2 class="h6"><b>Title : </b>${list[i].name} </h2>
-              <h3 class="h6"><b>Price : </b>${list[i].price}</h3>
-              <h3 class="h6"><b>Category : </b>${list[i].category}</h3>
-              <p class="h6"><b>Description : </b>${list[i].description}</p>
+              <h2 class="h6"><b>Title : </b>${allProduct[i].name} </h2>
+              <h3 class="h6"><b>Price : </b>${allProduct[i].price}</h3>
+              <h3 class="h6"><b>Category : </b>${allProduct[i].category}</h3>
+              <p class="h6"><b>Description : </b>${allProduct[i].description}</p>
               <button onclick="getDataToUbdate(${i})" class="btn btn-warning w-100 mb-2">Ubdate</button> 
-              <button onclick="DeleteItem(${list[i].id})" class="btn btn-danger w-100">Delete</button>
+              <button onclick="DeleteItem(${i})" class="btn btn-danger w-100">Delete</button>
               </div>
           </div>
         </div>
@@ -85,9 +83,9 @@ function clearForm() {
 }
 
 // delete item
-function DeleteItem(productId) {
-  console.log(productId);
-  allProduct.splice(productId, 1);
+function DeleteItem(index) {
+  console.log(index);
+  allProduct.splice(index, 1);
   displayProduct(allProduct);
   setLocalStorage();
 }
@@ -115,7 +113,7 @@ function ubdateData() {
   allProduct[currentIndex].category = productCategory.value;
   allProduct[currentIndex].description = productDescription.value;
   setLocalStorage();
-  displayProduct(allProduct);
+  displayProduct();
   clearForm();
   addBtn.classList.remove("d-none");
   ubdateBtn.classList.add("d-none");
@@ -125,26 +123,51 @@ function setLocalStorage() {
   localStorage.setItem("productContainer", JSON.stringify(allProduct));
 }
 
-
 // search item
 var searchBtn = document.getElementById("btnSearch");
 
 searchBtn.addEventListener("input", function () {
-  searchItem(this.value);
+  searchItem();
 })
 
-function searchItem(searchValue) {
-  var itemSearch = [];
+function searchItem() {
+  var term = searchBtn.value;
+  var cartona = "";
   for (var i = 0; i < allProduct.length; i++) {
-    if (allProduct[i].name.toLowerCase().includes(searchValue.toLowerCase())) {
-      itemSearch.push(allProduct[i]);
-      displayProduct(itemSearch);
+    if (allProduct[i].name.toLowerCase().includes(term.toLowerCase()) == true) {
+      cartona += `
+        <div class="col-md-4">
+          <div class="item rounded-2 overflow-hidden">
+            <img style="height: 300px;" src="${allProduct[i].image}" class="w-100" alt="product image">
+            <div class="item-desc p-2">
+              <h2 class="h6"><b>Title : </b>${allProduct[i].name} </h2>
+              <h3 class="h6"><b>Price : </b>${allProduct[i].price}</h3>
+              <h3 class="h6"><b>Category : </b>${allProduct[i].category}</h3>
+              <p class="h6"><b>Description : </b>${allProduct[i].description}</p>
+              <button onclick="getDataToUbdate(${i})" class="btn btn-warning w-100 mb-2">Ubdate</button> 
+              <button onclick="DeleteItem(${i})" class="btn btn-danger w-100">Delete</button>
+              </div>
+          </div>
+        </div>
+          `;
     }
   }
+  document.getElementById("myData").innerHTML = cartona;
 }
 
-// validation
+// function searchItem(searchValue) {
+//   var itemSearch = [];
+//   for (var i = 0; i < allProduct.length; i++) {
+//     if (allProduct[i].name.toLowerCase().includes(searchValue.toLowerCase())) {
+//       itemSearch.push(allProduct[i]);
+//       displayProduct(itemSearch);
+//     }
+//   }
+// }
 
+
+
+// validation
 // 1-validate name
 productName.addEventListener("input", function () {
   validateName();
