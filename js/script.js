@@ -10,6 +10,7 @@ var ubdateBtn = document.getElementById("btnUbdate");
 var currentIndex;
 
 var allProduct = [];
+
 if (localStorage.getItem("productContainer") != null) {
   allProduct = JSON.parse(localStorage.getItem("productContainer"));
   displayProduct(allProduct);
@@ -26,15 +27,17 @@ function addProduct() {
     validateName() == true &&
     validateNumer() == true &&
     validateCatogery() == true &&
-    validateDescription() == true &&
-    validateImage() == true
+    validateDescription() == true
+    // validateImage() == true
   ) {
     var productData = {
       name: productName.value,
       price: productPrice.value,
       category: productCategory.value,
       description: productDescription.value,
-      image: `image/${productImage.files[0]?.name}`
+      image: productImage.files[0]?.name ? `image/${productImage.files[0]?.name}`: `image/c.jpg`,
+      id : allProduct.length
+      
     }
     allProduct.push(productData);
     setLocalStorage();
@@ -57,7 +60,7 @@ function displayProduct(list) {
               <h3 class="h6"><b>Category : </b>${list[i].category}</h3>
               <p class="h6"><b>Description : </b>${list[i].description}</p>
               <button onclick="getDataToUbdate(${i})" class="btn btn-warning w-100 mb-2">Ubdate</button> 
-              <button onclick="DeleteItem(${i})" class="btn btn-danger w-100">Delete</button>
+              <button onclick="DeleteItem(${list[i].id})" class="btn btn-danger w-100">Delete</button>
               </div>
           </div>
         </div>
@@ -82,9 +85,9 @@ function clearForm() {
 }
 
 // delete item
-function DeleteItem(index) {
-  console.log(index);
-  allProduct.splice(index, 1);
+function DeleteItem(productId) {
+  console.log(productId);
+  allProduct.splice(productId, 1);
   displayProduct(allProduct);
   setLocalStorage();
 }
